@@ -14,8 +14,8 @@ class Product extends Model
 
     protected $fillable = [
         "title",
-        "description",
         "slug",
+        "description",
         "published",
         "inStock",
         "price",
@@ -31,17 +31,17 @@ class Product extends Model
             ->saveSlugsTo('slug');
     }
 
-    function product_images()
+    public function product_images()
     {
         return $this->belongsTo(ProductImages::class);
     }
 
-    function brand()
+    public function brand()
     {
         return $this->belongsTo(Brand::class);
     }
 
-    function category()
+    public function category()
     {
         return $this->belongsTo(Categories::class);
     }

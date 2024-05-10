@@ -24,7 +24,7 @@ class Categories extends Model
             ->saveSlugsTo('slug');
     }
 
-    protected function product()
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }

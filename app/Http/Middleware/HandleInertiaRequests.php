@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Controllers\AdminController;
+
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -19,7 +19,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      */
-    public function version(Request $request): string|null
+    public function Version(Request $request): string|null
     {
         return parent::version($request);
     }
@@ -31,18 +31,6 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        // return [
-        //     ...parent::share($request),
-        //     'auths' => [
-        //         'user' => $request->user(),
-        //     ],
-        //     'ziggy' => fn () => [
-        //         ...(new Ziggy)->toArray(),
-        //         'location' => $request->url(),
-        //     ]
-        // ];
-        // Existing code
-
 
         $sharedData = [
             ...parent::share($request),
@@ -52,6 +40,12 @@ class HandleInertiaRequests extends Middleware
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
+            ],
+            'flash' => fn () => [
+                'succes' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+                'warning' => $request->session()->get('warning'),
+                'info' => $request->session()->get('info'),
             ]
         ];
 

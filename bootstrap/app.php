@@ -3,7 +3,7 @@
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\RedirectAdmin;
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
+//// use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -24,7 +24,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'redirectAdmin' => RedirectAdmin::class
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
-        //
-
+    ->withExceptions(function () {
+        //// ->withExceptions(function (Exceptions $exceptions) {
     })->create();

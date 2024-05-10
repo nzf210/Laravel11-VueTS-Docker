@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Categories;
 use App\Models\Product;
 use App\Models\ProductImages;
 use Illuminate\Http\Request;
@@ -15,11 +17,22 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::get();
-        return Inertia::render("Admin/Products/Index", ['products' => $products]);
+        $category = Categories::get();
+        $brand = Brand::get();
+
+        return Inertia::render(
+            "Admin/Products/Index",
+            [
+                'products' => $products,
+                'category' => $category,
+                'brand' => $brand
+            ]
+        );
     }
 
-    public function stock(Request $request)
+    public function store(Request $request)
     {
+
         $product = new Product;
         $product->title = $request->title;
         $product->price = $request->price;
