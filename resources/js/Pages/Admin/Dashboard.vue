@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import AdminLayout from "@/Pages/Admin/Components/AdminLayout.vue";
+import { initFlowbite } from "flowbite";
+import { onMounted } from "vue";
+// initialize components based on data attribute selectors
+onMounted(() => {
+  initFlowbite();
+});
 // initialize components based on data attribute selectors
 interface Props {
   admin: string;
