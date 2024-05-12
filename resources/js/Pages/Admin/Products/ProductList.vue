@@ -5,7 +5,6 @@ import { onMounted, ref } from 'vue';
 import { ElMessageBox } from 'element-plus';
 import Swal from 'sweetalert2';
 import { initFlowbite } from "flowbite";
-import { PageProps } from '@/types';
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
@@ -149,7 +148,8 @@ const addProduct = async () => {
                 });
                 dialogVisible.value = false;
                 resetFormData();
-            }
+            },
+            preserveState: false,
         })
     } catch (error) {
         console.log('add data error =',error);
@@ -186,7 +186,8 @@ const updateProduct = async () => {
                 });
                 dialogVisible.value = false;
                 resetFormData();
-            }
+            },
+            preserveState: false,
 
         })
     } catch (err) {
@@ -226,7 +227,8 @@ const deleteImage = async (pimage: Image, index: any) => {
                     showConfirmButton: false,
                     title: page.props.flash.success
                 });
-            }
+            },
+            preserveState: false,
         })
     } catch (err) {
         console.log(err);

@@ -3,6 +3,7 @@ import { computed, reactive } from 'vue';
 import UserLayouts from './Layouts/UserLayouts.vue';
 import { router, usePage } from '@inertiajs/vue3';
 
+
 interface CartItem {
     id: number;
     product_id: number;
@@ -21,12 +22,10 @@ const { userAddress, cart } = usePage().props as any as {
     cart: Cart;
 };
 
-const { items,products, total } = cart.data;
+const { items, products, total } = cart.data;
 
 const carts = items as CartItem[];
 const itemId = (id: number) => carts.findIndex((item: CartItem) => item.product_id === id);
-
-console.log('idItem', carts[itemId(26)]?.quantity);
 
 const form = reactive({
     address1: null,
@@ -46,14 +45,19 @@ const formFilled = computed(()=>{
     form.type !== null )
 });
 
-
-const update = (product:any, quantity:any) =>
+const update = (product:any, quantity:number) =>
     router.patch(route('cart.update', product), {
         quantity,
+    },{
+        preserveState: false,
     });
+
 //remove form cart
-const remove = (product:any) =>
-                router.delete(route('cart.delete', product))
+const remove = (product:any) => {
+    router.delete(route('cart.delete', product),{
+        preserveState: false
+    })
+}
 
 //confirm order
 function submit() {
@@ -66,7 +70,9 @@ function submit() {
             address: form
         }
     })
-}
+};
+
+
 
 </script>
 <template>
